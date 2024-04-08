@@ -48,7 +48,13 @@ public class CompraController {
 
         int cantidad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa la cantidad del producto "));
 
-        instanceModel().insert(new Compra(objCliente.getId(),objCliente,objProducto.getId(),objProducto, cantidad));
+        if (cantidad > objProducto.getStock()) {
+            JOptionPane.showMessageDialog(null, "No puede comprar esta cantidad");
+        } else {
+            objProducto.setStock(objProducto.getStock() - cantidad);
+            instanceModel().insert(new Compra(objCliente.getId(),objCliente,objProducto.getId(),objProducto, cantidad));
+             // ProductoController.update();
+        }
     }
 
 

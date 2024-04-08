@@ -39,7 +39,7 @@ public class CompraModel implements CRUD {
             }
 
             objPrepare.close();
-            JOptionPane.showMessageDialog(null, "Medico Creado correctamente");
+            JOptionPane.showMessageDialog(null, "Compra realizada");
         }catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error adding Medico " + e.getMessage() + "No se puede añadir el medico");
         }
@@ -54,7 +54,8 @@ public class CompraModel implements CRUD {
 
         try{
             String sql = "SELECT * FROM compra INNER JOIN cliente ON cliente.id = compra.id_cliente" +
-                    " INNER JOIN producto ON producto.id = compra.id_producto ORDER BY compra.id ASC;";
+                    " INNER JOIN producto ON producto.id = compra.id_producto" +
+                    " INNER JOIN tienda ON tienda.id = producto.id_tienda ORDER BY compra.id ASC;";
             PreparedStatement objPrepareStatement = (PreparedStatement) objConnection.prepareStatement(sql);
             ResultSet objResult = objPrepareStatement.executeQuery();
 
